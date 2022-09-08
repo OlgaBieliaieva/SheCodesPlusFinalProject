@@ -1,0 +1,67 @@
+.container {
+  width: 90%;
+  margin-top: 30px;
+  padding: 0;
+}
+.border-success {
+  border-radius: 10px;
+}
+.input-group {
+  width: 50%;
+}
+.weather-icon {
+  font-size: 60px;
+}
+.temperature-scale {
+  font-size: 25px;
+}
+.card-day-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#button-addon2 {
+  font-size: 20px;
+}
+#currentCity {
+  font-weight: bold;
+  font-size: 30px;
+}
+#currentDay {
+  font-size: 30px;
+}
+#currentDateTime {
+  font-size: 20px;
+}
+#weatherIcon {
+  font-size: 60px;
+}
+#celsius-scale {
+  text-decoration: none;
+}
+#fahrenheit-scale {
+  text-decoration: none;
+}
+#currentTemperature {
+  font-size: 22px;
+}
+#dayInfo {
+  font-size: 15px;
+}
+#tenDaysForecast {
+  font-size: 15px;
+}
+#monthlyForecast {
+  font-size: 15px;
+}
+#card-day-icon {
+  font-size: 40px;
+}
+#cardDayTemperature {
+  text-align: left;
+  font-size: 15px;
+}
+#card-day-moonday {
+  font-size: 12px;
+  font-style: italic;
+}
