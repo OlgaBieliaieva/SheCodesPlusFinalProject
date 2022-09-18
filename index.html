@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -19,27 +20,35 @@
         <form id="search-location">
           <div class="input-group mb-3">
             <input
-              type="text"
+              type="search"
               class="form-control"
               placeholder="Search for location"
+              autofocus="on"
+              autocomplete="off"
               aria-label="location"
               aria-describedby="button-addon2"
               id="user-location"
             />
             <button
               class="btn btn-outline-secondary"
+              type="submit"
+              value="Search"
+              id="button-addon2"
+            >
+              Choose a location
+            </button>
+            <button
+              class="current-location-button btn btn-outline-secondary"
               type="button"
               id="button-addon2"
             >
-              🔍
+              Your current location
             </button>
           </div>
         </form>
         <div class="container text-left">
           <div class="row">
-            <div class="col-2" id="currentCity">
-              Poltava
-            </div>
+            <div class="col-2" id="currentCity"></div>
             <div class="col-6" id="currentDay">
               Today
             </div>
@@ -49,10 +58,9 @@
             </div>
           </div>
         </div>
-        <div class="container text-left">
+        <div class="container text-left" id="currentWeather">
           <div class="row">
-            <div class="col-4" id="weatherIcon">
-              ☀
+            <div class="col-4">
               <span id="temperature">28</span>
               <sup>
                 <span class="temperature-scale">
@@ -63,23 +71,26 @@
             </div>
             <div class="col-4"></div>
             <div class="col-4" id="dayInfo">
-              sunrise 05:44
+              sunrise
+              <time datetime="2018-07-07T20:00:00" id="sunriseTime">05:44</time>
               <br />
-              sunset 20:21 <br />
-              day length 14:37
+              sunset
+              <time datetime="2018-07-07T20:00:00" id="sunsetTime">20:21</time>
+              <br />
+              <!-- day length <time datetime="2018-07-07T20:00:00"  id="dayLength">14:37</time>  -->
             </div>
           </div>
         </div>
         <div class="container text-left">
           <div class="row">
             <div class="col-2" id="wind">
-              wind: 20 km/h
+              wind: <span id="windSpeed">20</span> km/h
             </div>
             <div class="col-8" id="humidity">
-              humidity: 50%
+              humidity: <span id="humidityIndicator">50</span> %
             </div>
             <div class="col-2" id="moonDay">
-              🌔 23 moon day
+              <!-- 🌔 23 moon day -->
             </div>
           </div>
         </div>

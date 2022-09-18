@@ -7,11 +7,9 @@
   border-radius: 10px;
 }
 .input-group {
-  width: 50%;
+  width: 70%;
 }
-.weather-icon {
-  font-size: 60px;
-}
+
 .temperature-scale {
   font-size: 25px;
 }
@@ -34,6 +32,10 @@
   font-size: 20px;
 }
 #weatherIcon {
+  display: inline;
+  width: 0, auto;
+}
+#temperature {
   font-size: 60px;
 }
 #celsius-scale {

@@ -1,67 +1,167 @@
-// Feature #1
-// In your project, display the current date and time using JavaScript: Tuesday 16:00
-const now = new Date();
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-const day = days[now.getDay()];
+/// this function returns formatted date and time
+function formatDateTime(date) {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const day = days[date.getDay()];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const month = months[date.getMonth()];
+  const dayOfTheMonth = date.getDate();
+  const year = date.getFullYear();
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${day}, ${month} ${dayOfTheMonth}, ${year}  ${hours}:${minutes}`;
+}
+// this code displays current date and time
+let currentDateTimeElement = document.querySelector("#currentDateTime");
+let currentDateTime = new Date();
+currentDateTimeElement.innerHTML = formatDateTime(currentDateTime);
 
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const month = months[now.getMonth()];
-const date = now.getDate();
-const year = now.getFullYear();
-const hours = now.getHours();
-const minutes = now.getMinutes();
-let formattedDate = `${day}, ${month} ${date}, ${year}  ${hours}:${minutes}`;
-let currentDay = document.querySelector("#currentDateTime");
-currentDay.innerHTML = formattedDate;
-
-// Feature #2
-// Add a search engine, when searching for a city (i.e. Paris), display the city name on the page
-// after the user submits the form.
+// this function displays location that user submit
 function searchLocation(event) {
   event.preventDefault();
+  let apiKey = "cabdbda40038ba7d1165b953b1c7bd6c";
   let locationInput = document.querySelector("#user-location");
-  let userLocation = document.querySelector("#currentCity");
-  userLocation.innerHTML = locationInput.value;
+  // let userChooseLocation = document.querySelector("#currentCity");
+  let userChooseLocation = locationInput.value;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${userChooseLocation}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showSearchLocationWeather);
+  // userChooseLocation.innerHTML = locationInput.value;
 }
+
+function showSearchLocationWeather(response) {
+  let cityName = response.data.name;
+  let countryName = response.data.sys.country;
+  let weatherIcon = response.data.weather[0].icon;
+  let temp = response.data.main.temp;
+  let wind = response.data.wind.speed;
+  let humidity = response.data.main.humidity;
+  let sunriseTime = new Date(response.data.sys.sunrise * 1000);
+  let sunriseHours = sunriseTime.getHours();
+  if (sunriseHours < 10) {
+    sunriseHours = `0${sunriseHours}`;
+  }
+  let sunriseMinutes = sunriseTime.getMinutes();
+  if (sunriseMinutes < 10) {
+    sunriseMinutes = `0${sunriseMinutes}`;
+  }
+  let formattedSunriseTime = `${sunriseHours}:${sunriseMinutes}`;
+  let sunsetTime = new Date(response.data.sys.sunset * 1000);
+  let sunsetHours = sunsetTime.getHours();
+  if (sunsetHours < 10) {
+    sunsetHours = `0${sunsetHours}`;
+  }
+  let sunsetMinutes = sunsetTime.getMinutes();
+  if (sunsetMinutes < 10) {
+    sunsetMinutes = `0${sunsetMinutes}`;
+  }
+  let formattedSunsetTime = `${sunsetHours}:${sunsetMinutes}`;
+
+  let userLocationCity = document.querySelector("#currentCity");
+  userLocationCity.innerHTML = `${cityName}, ${countryName}`;
+  let userLocationWeatherIcon = document.getElementById("currentWeather");
+  userLocationWeatherIcon.insertAdjacentHTML(
+    "afterbegin",
+    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="100" id="weatherIcon"></img>`
+  );
+  let userLocationTemp = document.querySelector("#temperature");
+  userLocationTemp.innerHTML = `${Math.round(temp)}`;
+  let userLocationWindSpeed = document.querySelector("#windSpeed");
+  userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
+  let userLocationHumidity = document.querySelector("#humidityIndicator");
+  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
+  let userLocationSunriseTime = document.querySelector("#sunriseTime");
+  userLocationSunriseTime.innerHTML = `${formattedSunriseTime}`;
+  let userLocationSunsetTime = document.querySelector("#sunsetTime");
+  userLocationSunsetTime.innerHTML = `${formattedSunsetTime}`;
+}
+// this code creates an event for "Choose a location" button
 let searchLocationForm = document.querySelector("#search-location");
-searchLocationForm.addEventListener("click", searchLocation);
+searchLocationForm.addEventListener("submit", searchLocation);
 
-// Bonus Feature
-// Display a fake temperature (i.e 17) in Celsius and add a link to convert it to Fahrenheit.
-// When clicking on it, it should convert the temperature to Fahrenheit.
-// When clicking on Celsius, it should convert it back to Celsius.
-const temperatureElement = document.querySelector("#temperature");
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  temperatureElement.innerHTML = 82;
+// this function transfers user geolocation to other functions
+function retrievePosition(position) {
+  let apiKey = "cabdbda40038ba7d1165b953b1c7bd6c";
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showUserLocationWeather);
 }
-function convertToCelsius(event) {
-  event.preventDefault();
-  temperatureElement.innerHTML = 28;
+// this function displays user location
+function showUserLocationWeather(response) {
+  let cityName = response.data.name;
+  let countryName = response.data.sys.country;
+  let weatherIcon = response.data.weather[0].icon;
+  let temp = response.data.main.temp;
+  let wind = response.data.wind.speed;
+  let humidity = response.data.main.humidity;
+  let sunriseTime = new Date(response.data.sys.sunrise * 1000);
+  let sunriseHours = sunriseTime.getHours();
+  if (sunriseHours < 10) {
+    sunriseHours = `0${sunriseHours}`;
+  }
+  let sunriseMinutes = sunriseTime.getMinutes();
+  if (sunriseMinutes < 10) {
+    sunriseMinutes = `0${sunriseMinutes}`;
+  }
+  let formattedSunriseTime = `${sunriseHours}:${sunriseMinutes}`;
+  let sunsetTime = new Date(response.data.sys.sunset * 1000);
+  let sunsetHours = sunsetTime.getHours();
+  if (sunsetHours < 10) {
+    sunsetHours = `0${sunsetHours}`;
+  }
+  let sunsetMinutes = sunsetTime.getMinutes();
+  if (sunsetMinutes < 10) {
+    sunsetMinutes = `0${sunsetMinutes}`;
+  }
+  let formattedSunsetTime = `${sunsetHours}:${sunsetMinutes}`;
+  let userLocationCity = document.querySelector("#currentCity");
+  userLocationCity.innerHTML = `${cityName}, ${countryName}`;
+  let userLocationWeatherIcon = document.getElementById("currentWeather");
+  userLocationWeatherIcon.insertAdjacentHTML(
+    "afterbegin",
+    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="100" id="weatherIcon"></img>`
+  );
+  let userLocationTemp = document.querySelector("#temperature");
+  userLocationTemp.innerHTML = `${Math.round(temp)}`;
+  let userLocationWindSpeed = document.querySelector("#windSpeed");
+  userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
+  let userLocationHumidity = document.querySelector("#humidityIndicator");
+  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
+  let userLocationSunriseTime = document.querySelector("#sunriseTime");
+  userLocationSunriseTime.innerHTML = `${formattedSunriseTime}`;
+  let userLocationSunsetTime = document.querySelector("#sunsetTime");
+  userLocationSunsetTime.innerHTML = `${formattedSunsetTime}`;
 }
-let fahrenheitLink = document.querySelector("#fahrenheit-scale");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
-
-let celsiusLink = document.querySelector("#celsius-scale");
-celsiusLink.addEventListener("click", convertToCelsius);
+// this function sets user location
+function getUserLocation() {
+  navigator.geolocation.getCurrentPosition(retrievePosition);
+}
+// this code creates an event for "Your current location" button
+let currentLocationButton = document.querySelector(".current-location-button");
+currentLocationButton.addEventListener("click", getUserLocation);
