@@ -99,6 +99,7 @@ function showSearchLocationWeather(response) {
   userLocationSunriseTime.innerHTML = `${formattedSunriseTime}`;
   let userLocationSunsetTime = document.querySelector("#sunsetTime");
   userLocationSunsetTime.innerHTML = `${formattedSunsetTime}`;
+  let userLocation
 }
 // this code creates an event for "Choose a location" button
 let searchLocationForm = document.querySelector("#search-location");
