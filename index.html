@@ -13,48 +13,38 @@
   </head>
   <body>
     <div class="container">
+      <main class="weather-app">
       <div class="border border-success p-2 border-opacity-10">
-        <form id="search-location">
-          <div class="input-group mb-3">
-            <input
+        <section class="search-location-form">
+          <form id="search-location">
+            <div>
+              <input
               type="search"
               class="form-control"
+              id="user-location"
               placeholder="Search for location"
               autofocus="on"
               autocomplete="off"
-              aria-label="location"
-              aria-describedby="button-addon2"
-              id="user-location"
-            />
-            <button
-              class="btn btn-outline-secondary"
-              type="submit"
-              value="Search"
-              id="button-addon2"
-            >
-              Choose a location
-            </button>
-            <button
-              class="current-location-button btn btn-outline-secondary"
-              type="button"
-              id="button-addon2"
-            >
-              Your current location
-            </button>
-          </div>
-        </form>
-        <div class="container text-left">
-          <div class="row">
-            <div class="col-2" id="currentCity"></div>
-            <div class="col-6" id="currentDay">
-              Today
+              aria-label="location"/>
+              <button class="btn btn-primary" type="submit" value="Search">Choose a location</button>
             </div>
-            <div class="col-4" id="currentDateTime">
-              Saturday 20/08/22/
-              <time datetime="2018-07-07T20:00:00">13:00</time>
+          </form>
+        </section>
+        <section class="current-weather">
+          <div class="container text-left">
+            <div class="row">
+              <div class="col-2" id="currentCity">
+              </div>
+              <div class="col-6" id="currentDay">
+                Today
+              </div>
+              <div class="col-4" id="currentDateTime">
+                Saturday 20/08/22/
+                <time datetime="2018-07-07T20:00:00">13:00</time>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
         <div class="container text-left" id="currentWeather">
           <div class="row">
             <div class="col-4">
@@ -101,7 +91,7 @@
               <a href="">MONTHLY FORECAST</a>
             </div>
           </div> -->
-        </div>
+        
         <div class="container text-center">
           <div class="row">
             <div class="col">
@@ -243,9 +233,8 @@
             </div>
           </div>
         </div>
-        <br />
-        <br />
-        <p class="signature">
+      </div>
+      <p class="signature">
           <a
             href="https://github.com/OlgaBieliaieva/SheCodesPlusFinalProject.git"
             class="link-to-github"
@@ -253,6 +242,7 @@
           >
           , by Olga Bieliaieva
         </p>
+      </main>
       </div>
     </div>
     <script src="index.js"></script>

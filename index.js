@@ -164,5 +164,6 @@ function getUserLocation() {
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
 // this code creates an event for "Your current location" button
-let currentLocationButton = document.querySelector(".current-location-button");
-currentLocationButton.addEventListener("click", getUserLocation);
+// let currentLocationButton = document.querySelector(".current-location-button");
+// currentLocationButton.addEventListener("click", getUserLocation);
+Document.addEventListener("DOMContentLoaded", getUserLocation())
