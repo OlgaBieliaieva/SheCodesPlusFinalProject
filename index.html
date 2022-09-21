@@ -25,9 +25,9 @@
                 autocomplete="off" 
                 aria-label="location"/>
               </div>
-              <div class="col-2">
+              <div class="col-3">
                 <button class="btn btn-primary" type="submit" value="Search">
-                  Choose a location
+                  Choose
                 </button>
               </div>
             </div>
@@ -48,7 +48,7 @@
         </section>
         <div class="container-fluid text-left" id="currentWeather">
           <div class="row">
-            <div class="col-4">
+            <div class="col-2">
               <span id="temperature">28</span>
               <sup>
                 <span class="temperature-scale">
@@ -71,12 +71,16 @@
         </div>
         <div class="container-fluid text-left">
           <div class="row">
-            <div class="col-2" id="wind">
+            <div class="col-4" id="wind">
               wind: <span id="windSpeed">20</span> km/h
             </div>
-            <div class="col-8" id="humidity">
-              humidity: <span id="humidityIndicator">50</span> %
+            <div class="row">
+              <div class="col-4" id="humidity">
+                humidity: <span id="humidityIndicator">50</span> %
+              </div>
             </div>
+            
+           
             <!-- <div class="col-2" id="moonDay">
               🌔 23 moon day
             </div> -->
