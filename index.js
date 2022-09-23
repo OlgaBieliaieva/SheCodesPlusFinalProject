@@ -59,6 +59,7 @@ function showSearchLocationWeather(response) {
   let countryName = response.data.sys.country;
   let weatherIcon = response.data.weather[0].icon;
   let temp = response.data.main.temp;
+  celsiusTemperature = response.data.main.temp;
   let wind = response.data.wind.speed;
   let humidity = response.data.main.humidity;
   let sunriseTime = new Date(response.data.sys.sunrise * 1000);
@@ -119,6 +120,7 @@ function showUserLocationWeather(response) {
   let countryName = response.data.sys.country;
   let weatherIcon = response.data.weather[0].icon;
   let temp = response.data.main.temp;
+  celsiusTemperature = response.data.main.temp;
   let wind = response.data.wind.speed;
   let humidity = response.data.main.humidity;
   let sunriseTime = new Date(response.data.sys.sunrise * 1000);
@@ -163,6 +165,29 @@ function showUserLocationWeather(response) {
 function getUserLocation() {
   navigator.geolocation.getCurrentPosition(retrievePosition);
 }
+function displayFahrenheitScale(event) {
+  event.preventDefault();
+  celsiusScale.classList.remove("active");
+  fahrenheitScale.classList.add("active");
+  let temperatureElement = document.querySelector("#temperature");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+function displayCelsiusScale(event) {
+  event.preventDefault();
+  fahrenheitScale.classList.remove("active");
+  celsiusScale.classList.add("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let fahrenheitScale = document.querySelector("#fahrenheitScale");
+fahrenheitScale.addEventListener("click", displayFahrenheitScale);
+let celsiusScale = document.querySelector("#celsiusScale");
+celsiusScale.addEventListener("click", displayCelsiusScale);
+
 // this code creates an event for "Your current location" button
 // let currentLocationButton = document.querySelector(".current-location-button");
 // currentLocationButton.addEventListener("click", getUserLocation);

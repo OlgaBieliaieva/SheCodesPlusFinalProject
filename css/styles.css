@@ -16,11 +16,21 @@ body {
 .temperature-scale {
   font-size: 25px;
 }
+.temperature-scale a {
+  text-decoration: none;
+}
 .card-day-title {
   font-size: 20px;
   font-weight: bold;
 }
 
+.active {
+  color: #000000;
+  cursor: default;
+}
+.active:hover {
+  text-decoration: none;
+}
 #user-location {
   display: inline;
   
