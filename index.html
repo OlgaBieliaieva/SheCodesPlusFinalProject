@@ -30,53 +30,41 @@
                   Choose
                 </button>
               </div>
+              <div class="col-5 current-time" id="currentDateTime">              
+                <time datetime="2018-07-07T20:00:00"></time>
+              </div>
             </div>
           </form>
         </section>
         <section class="current-weather">
           <div class="container-fluid text-left">
             <div class="row">
-              <div class="col-2" id="currentCity">
-              </div>
-              <div class="col-4" id="currentDay"></div>
-              <div class="col-4" id="currentDateTime">
-                Saturday 20/08/22/
-                <time datetime="2018-07-07T20:00:00">13:00</time>
-              </div>
-            </div>
+              <div class="col-7" id="currentCity"></div>
+              <div class="col-5"></div>
           </div>
         </section>
-        <div class="container-fluid text-left" id="currentWeather">
+        <div class="container-fluid text-left" >
           <div class="row">
-            <div class="col-2">
-              <span id="temperature">28</span>
-              <sup>
+            <div class="col-2" id="currentWeather"></div>
+            <div class="col-5">
+              <span id="temperature"></span>
+              <sup class="scale">
                 <span class="temperature-scale">
                   <a href="#" class="active" id="celsiusScale">°C</a> |
                   <a href="#" id="fahrenheitScale">°F</a>
                 </span>
               </sup>
-            </div>
-            <div class="col-4"></div>
-            <div class="col-4" id="dayInfo">
-              sunrise
-              <time datetime="2018-07-07T20:00:00" id="sunriseTime">05:44</time>
-              <br />
-              sunset
-              <time datetime="2018-07-07T20:00:00" id="sunsetTime">20:21</time>
-              <br />
-              <!-- day length <time datetime="2018-07-07T20:00:00"  id="dayLength">14:37</time>  -->
-            </div>
+            </div>            
           </div>
         </div>
         <div class="container-fluid text-left">
           <div class="row">
-            <div class="col-4" id="wind">
-              wind: <span id="windSpeed">20</span> km/h
+            <div class="col-6" id="wind">
+              wind: <span id="windSpeed"></span> km/h
             </div>
             <div class="row">
-              <div class="col-4" id="humidity">
-                humidity: <span id="humidityIndicator">50</span> %
+              <div class="col-6" id="humidity">
+                humidity: <span id="humidityIndicator"></span> %
               </div>
             </div>
             
@@ -100,32 +88,13 @@
         <div class="container-fluid text-center">
           <div class="row">
             <div class="col">
-              <div class="card">
+              <div class="card" id="forecast-card" >
                 <div class="card-body">
                   <span class="card-day-title" id="card1Title">Today</span>
                   <br />
                   <br />
                   <!-- Add weather icon -->
-                  <table id="card1Table">
-                    <tr id="card1TableTemperature">
-                      <td>
-                        <span id="card1TemperatureMax">21</span>
-                        °C
-                      </td>
-                      <td>
-                        <span id="card1TemperatureMin">12</span>
-                        °C
-                      </td>
-                    </tr>
-                    <tr id="card1TableRow2">
-                      <td>
-                        Max
-                      </td>
-                      <td>
-                        Min
-                      </td>
-                    </tr>
-                  </table>
+                  
                   <span class="card-day-footer" id="card1Footer">broken clouds</span>
                   <!-- <div class="row"> 
                     <div class="col">

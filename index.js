@@ -1,6 +1,4 @@
-/// this function returns formatted date and time
-function formatDateTime(date) {
-  const days = [
+const days = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -8,8 +6,7 @@ function formatDateTime(date) {
     "Thursday",
     "Friday",
     "Saturday",
-  ];
-  const day = days[date.getDay()];
+];
   const months = [
     "Jan",
     "Feb",
@@ -24,6 +21,9 @@ function formatDateTime(date) {
     "Nov",
     "Dec",
   ];
+/// this function returns formatted date and time
+function formatDateTime(date) {
+  const day = days[date.getDay()];  
   const month = months[date.getMonth()];
   const dayOfTheMonth = date.getDate();
   const year = date.getFullYear();
@@ -42,6 +42,7 @@ let currentDateTimeElement = document.querySelector("#currentDateTime");
 let currentDateTime = new Date();
 currentDateTimeElement.innerHTML = formatDateTime(currentDateTime);
 
+
 // this function displays location that user submit
 function searchLocation(event) {
   event.preventDefault();
@@ -56,33 +57,12 @@ function searchLocation(event) {
 
 function showSearchLocationWeather(response) {
   let cityName = response.data.name;
-  let countryName = response.data.sys.country;
+  let countryName = response.data.sys.country;  
   let weatherIcon = response.data.weather[0].icon;
   let temp = response.data.main.temp;
   celsiusTemperature = response.data.main.temp;
   let wind = response.data.wind.speed;
   let humidity = response.data.main.humidity;
-  let sunriseTime = new Date(response.data.sys.sunrise * 1000);
-  let sunriseHours = sunriseTime.getHours();
-  if (sunriseHours < 10) {
-    sunriseHours = `0${sunriseHours}`;
-  }
-  let sunriseMinutes = sunriseTime.getMinutes();
-  if (sunriseMinutes < 10) {
-    sunriseMinutes = `0${sunriseMinutes}`;
-  }
-  let formattedSunriseTime = `${sunriseHours}:${sunriseMinutes}`;
-  let sunsetTime = new Date(response.data.sys.sunset * 1000);
-  let sunsetHours = sunsetTime.getHours();
-  if (sunsetHours < 10) {
-    sunsetHours = `0${sunsetHours}`;
-  }
-  let sunsetMinutes = sunsetTime.getMinutes();
-  if (sunsetMinutes < 10) {
-    sunsetMinutes = `0${sunsetMinutes}`;
-  }
-  let formattedSunsetTime = `${sunsetHours}:${sunsetMinutes}`;
-
   let userLocationCity = document.querySelector("#currentCity");
   userLocationCity.innerHTML = `${cityName}, ${countryName}`;
   let userLocationWeatherIcon = document.getElementById("currentWeather");
@@ -96,11 +76,6 @@ function showSearchLocationWeather(response) {
   userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
   let userLocationHumidity = document.querySelector("#humidityIndicator");
   userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
-  let userLocationSunriseTime = document.querySelector("#sunriseTime");
-  userLocationSunriseTime.innerHTML = `${formattedSunriseTime}`;
-  let userLocationSunsetTime = document.querySelector("#sunsetTime");
-  userLocationSunsetTime.innerHTML = `${formattedSunsetTime}`;
-  let userLocation
 }
 // this code creates an event for "Choose a location" button
 let searchLocationForm = document.querySelector("#search-location");
@@ -123,43 +98,19 @@ function showUserLocationWeather(response) {
   celsiusTemperature = response.data.main.temp;
   let wind = response.data.wind.speed;
   let humidity = response.data.main.humidity;
-  let sunriseTime = new Date(response.data.sys.sunrise * 1000);
-  let sunriseHours = sunriseTime.getHours();
-  if (sunriseHours < 10) {
-    sunriseHours = `0${sunriseHours}`;
-  }
-  let sunriseMinutes = sunriseTime.getMinutes();
-  if (sunriseMinutes < 10) {
-    sunriseMinutes = `0${sunriseMinutes}`;
-  }
-  let formattedSunriseTime = `${sunriseHours}:${sunriseMinutes}`;
-  let sunsetTime = new Date(response.data.sys.sunset * 1000);
-  let sunsetHours = sunsetTime.getHours();
-  if (sunsetHours < 10) {
-    sunsetHours = `0${sunsetHours}`;
-  }
-  let sunsetMinutes = sunsetTime.getMinutes();
-  if (sunsetMinutes < 10) {
-    sunsetMinutes = `0${sunsetMinutes}`;
-  }
-  let formattedSunsetTime = `${sunsetHours}:${sunsetMinutes}`;
   let userLocationCity = document.querySelector("#currentCity");
   userLocationCity.innerHTML = `${cityName}, ${countryName}`;
   let userLocationWeatherIcon = document.getElementById("currentWeather");
   userLocationWeatherIcon.insertAdjacentHTML(
     "afterbegin",
-    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="100" id="weatherIcon"></img>`
+    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="50" id="weatherIcon"></img>`
   );
   let userLocationTemp = document.querySelector("#temperature");
   userLocationTemp.innerHTML = `${Math.round(temp)}`;
   let userLocationWindSpeed = document.querySelector("#windSpeed");
   userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
   let userLocationHumidity = document.querySelector("#humidityIndicator");
-  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
-  let userLocationSunriseTime = document.querySelector("#sunriseTime");
-  userLocationSunriseTime.innerHTML = `${formattedSunriseTime}`;
-  let userLocationSunsetTime = document.querySelector("#sunsetTime");
-  userLocationSunsetTime.innerHTML = `${formattedSunsetTime}`;
+  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;  
 }
 // this function sets user location
 function getUserLocation() {
@@ -191,4 +142,4 @@ celsiusScale.addEventListener("click", displayCelsiusScale);
 // this code creates an event for "Your current location" button
 // let currentLocationButton = document.querySelector(".current-location-button");
 // currentLocationButton.addEventListener("click", getUserLocation);
-Document.addEventListener("DOMContentLoaded", getUserLocation())
+Document.addEventListener("DOMContentLoaded", getUserLocation());

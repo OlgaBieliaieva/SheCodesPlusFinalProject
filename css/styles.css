@@ -3,6 +3,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.scale {
+top: -1.7em;
+}
 .container-fluid {
   padding: 10px;
 }
@@ -13,11 +16,18 @@ body {
 .border-success {
   border-radius: 10px;
 }
-.temperature-scale {
-  font-size: 25px;
+.btn {
+  max-width: 100%;
 }
+.temperature-scale {
+  font-size: 1.5em;
+  display:inline-block;  
+ }
 .temperature-scale a {
   text-decoration: none;
+}
+#forecast-card {
+  background-color: transparent;
 }
 .card-day-title {
   font-size: 20px;
@@ -31,26 +41,30 @@ body {
 .active:hover {
   text-decoration: none;
 }
-#user-location {
-  display: inline;
-  
-}
+
 #currentCity {
-  font-weight: bold;
-  font-size: 30px;
+  text-align: left;
+    color: var(--bs-white);
+    font-weight: 700;
+    font-size: 1.7em;
 }
 #currentDay {
   font-size: 30px;
 }
 #currentDateTime {
-  font-size: 20px;
+  text-align: left;
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 1.2em;
 }
 #weatherIcon {
-  display: inline;
-  width: 0, auto;
+ display: block;  
 }
 #temperature {
-  font-size: 60px;
+  text-align: left;
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 2.5em;
 }
 #celsius-scale {
   text-decoration: none;
@@ -58,17 +72,17 @@ body {
 #fahrenheit-scale {
   text-decoration: none;
 }
-#currentTemperature {
-  font-size: 22px;
+#wind {
+text-align: left;
+color: var(--bs-white);
+font-weight: 700;
+font-size: 1em;
 }
-#dayInfo {
-  font-size: 15px;
-}
-#tenDaysForecast {
-  font-size: 15px;
-}
-#monthlyForecast {
-  font-size: 15px;
+#humidity {
+  text-align: left;
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 1em;
 }
 #card-day-icon {
   font-size: 40px;
