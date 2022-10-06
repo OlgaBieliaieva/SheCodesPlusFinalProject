@@ -26,14 +26,25 @@ top: -1.7em;
 .temperature-scale a {
   text-decoration: none;
 }
-#forecast-card {
-  background-color: transparent;
+.forecast-section {
+  justify-content: space-between;
 }
-.card-day-title {
-  font-size: 20px;
-  font-weight: bold;
+.forecast-card {
+  padding: 0;
 }
-
+.card-title {
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 1.2em;
+}
+.card-data {
+  color: var(--bs-white);
+  font-weight: 600;
+  font-size: 1em;
+}
+.min-temperature {
+  color: rgba(0, 0, 0, 0.533);
+}
 .active {
   color: #000000;
   cursor: default;
@@ -48,9 +59,7 @@ top: -1.7em;
     font-weight: 700;
     font-size: 1.7em;
 }
-#currentDay {
-  font-size: 30px;
-}
+
 #currentDateTime {
   text-align: left;
   color: var(--bs-white);
@@ -83,15 +92,4 @@ font-size: 1em;
   color: var(--bs-white);
   font-weight: 700;
   font-size: 1em;
-}
-#card-day-icon {
-  font-size: 40px;
-}
-#cardDayTemperature {
-  text-align: left;
-  font-size: 15px;
-}
-#card-day-moonday {
-  font-size: 12px;
-  font-style: italic;
 }
