@@ -3,6 +3,12 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.container-fluid-main {
+  min-height: 500px;
+}
+.row {
+  min-height: 80px;
+}
 .scale {
 top: -1.7em;
 }
@@ -28,6 +34,7 @@ top: -1.7em;
 }
 .forecast-section {
   justify-content: space-between;
+  min-height: 200px;
 }
 .forecast-card {
   padding: 0;
@@ -52,7 +59,11 @@ top: -1.7em;
 .active:hover {
   text-decoration: none;
 }
-
+.signature {
+  display: inline;
+  margin: 0 auto;
+  text-align: center; 
+}
 #currentCity {
   text-align: left;
     color: var(--bs-white);

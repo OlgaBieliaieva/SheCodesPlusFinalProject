@@ -110,7 +110,14 @@ function showUserLocationWeather(response) {
   let userLocationWindSpeed = document.querySelector("#windSpeed");
   userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
   let userLocationHumidity = document.querySelector("#humidityIndicator");
-  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;  
+  userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
+  
+  getForecast(response.data.coord);
+}
+function getForecast(coordinates) {
+  let apiKeyForecast = "e0d98b07750549a79c2d6594dfc5c44d";
+  let apiUrlForecast = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKeyForecast}`;
+  console.log(apiUrlForecast)
 }
 // this function sets user location
 function getUserLocation() {
