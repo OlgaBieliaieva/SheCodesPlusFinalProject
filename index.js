@@ -1,29 +1,29 @@
 const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 /// this function returns formatted date and time
 function formatDateTime(date) {
-  const day = days[date.getDay()];  
+  const day = days[date.getDay()];
   const month = months[date.getMonth()];
   const dayOfTheMonth = date.getDate();
   const year = date.getFullYear();
@@ -42,7 +42,6 @@ let currentDateTimeElement = document.querySelector("#currentDateTime");
 let currentDateTime = new Date();
 currentDateTimeElement.innerHTML = formatDateTime(currentDateTime);
 
-
 // this function displays location that user submit
 function searchLocation(event) {
   event.preventDefault();
@@ -57,7 +56,7 @@ function searchLocation(event) {
 
 function showSearchLocationWeather(response) {
   let cityName = response.data.name;
-  let countryName = response.data.sys.country;  
+  let countryName = response.data.sys.country;
   let weatherIcon = response.data.weather[0].icon;
   let temp = response.data.main.temp;
   celsiusTemperature = response.data.main.temp;
@@ -68,7 +67,7 @@ function showSearchLocationWeather(response) {
   let userLocationWeatherIcon = document.getElementById("currentWeather");
   userLocationWeatherIcon.insertAdjacentHTML(
     "afterbegin",
-    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="100" id="weatherIcon"></img>`
+    `<img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="weather picture" width="50" id="weatherIcon"></img>`
   );
   let userLocationTemp = document.querySelector("#temperature");
   userLocationTemp.innerHTML = `${Math.round(temp)}`;
@@ -76,6 +75,104 @@ function showSearchLocationWeather(response) {
   userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
   let userLocationHumidity = document.querySelector("#humidityIndicator");
   userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
+  getSearchLocationForecast(response.data.coord);
+}
+function getSearchLocationForecast(coordinates) {
+  let apiKeyForecast = "057ae8c99b7b411cbfe143125220910";
+  let apiUrlForecast = `https://api.weatherapi.com/v1/forecast.json?key=${apiKeyForecast}&q=${coordinates.lat},${coordinates.lon}&days=5&aqi=yes&alerts=yes`;
+  axios.get(apiUrlForecast).then(showSearchLocationForecast);
+}
+function showSearchLocationForecast(response) {
+  let userLocationForecastItem = document.getElementById("forecastItems");
+  userLocationForecastItem.insertAdjacentHTML(
+    "afterbegin",
+    `
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[0].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[0].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[0].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[0].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[0].day.mintemp_c
+    )}°</span></p>
+            </div>  
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[1].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[1].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[1].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[1].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[1].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[2].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[2].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[2].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[2].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[2].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[3].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[3].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[3].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[3].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[3].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[4].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[4].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[4].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[4].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[4].day.mintemp_c
+    )}°</span></p>
+            </div>   `
+  );
 }
 // this code creates an event for "Choose a location" button
 let searchLocationForm = document.querySelector("#search-location");
@@ -88,6 +185,7 @@ function retrievePosition(position) {
   let lon = position.coords.longitude;
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
   axios.get(url).then(showUserLocationWeather);
+  console.log(lat, lon);
 }
 // this function displays user location
 function showUserLocationWeather(response) {
@@ -111,13 +209,105 @@ function showUserLocationWeather(response) {
   userLocationWindSpeed.innerHTML = `${Math.round(wind)}`;
   let userLocationHumidity = document.querySelector("#humidityIndicator");
   userLocationHumidity.innerHTML = `${Math.round(humidity)}`;
-  
-  getForecast(response.data.coord);
+
+  getUserLocationForecast(response.data.coord);
 }
-function getForecast(coordinates) {
-  let apiKeyForecast = "e0d98b07750549a79c2d6594dfc5c44d";
-  let apiUrlForecast = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKeyForecast}`;
-  console.log(apiUrlForecast)
+function getUserLocationForecast(coordinates) {
+  let apiKeyForecast = "057ae8c99b7b411cbfe143125220910";
+  let apiUrlForecast = `https://api.weatherapi.com/v1/forecast.json?key=${apiKeyForecast}&q=${coordinates.lat},${coordinates.lon}&days=5&aqi=yes&alerts=yes`;
+  axios.get(apiUrlForecast).then(showUserLocationForecast);
+}
+function showUserLocationForecast(response) {
+  let userLocationForecastItem = document.getElementById("forecastItems");
+  userLocationForecastItem.insertAdjacentHTML(
+    "afterbegin",
+    `
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[0].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[0].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[0].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[0].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[0].day.mintemp_c
+    )}°</span></p>
+            </div>  
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[1].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[1].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[1].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[1].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[1].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[2].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[2].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[2].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[2].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[2].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[3].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[3].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[3].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[3].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[3].day.mintemp_c
+    )}°</span></p>
+            </div> 
+            <div class="col-2 forecast-card">
+              <time datetime="2018-07-07T20:00:00">${
+                response.data.forecast.forecastday[4].date
+              }</time>
+              <br> 
+              <img src="https:${
+                response.data.forecast.forecastday[4].day.condition.icon
+              }" alt="" width="50">
+              <br> 
+              ${response.data.forecast.forecastday[4].day.condition.text}
+              <br> 
+              <p class="card-data">${Math.round(
+                response.data.forecast.forecastday[4].day.maxtemp_c
+              )}°<span class="min-temperature">${Math.round(
+      response.data.forecast.forecastday[4].day.mintemp_c
+    )}°</span></p>
+            </div>   `
+  );
 }
 // this function sets user location
 function getUserLocation() {

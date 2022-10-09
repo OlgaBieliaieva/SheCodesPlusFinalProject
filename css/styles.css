@@ -10,14 +10,14 @@ body {
   min-height: 80px;
 }
 .scale {
-top: -1.7em;
+  top: -1.7em;
 }
 .container-fluid {
   padding: 10px;
 }
 .weather-app {
   width: 100%;
-  margin:auto;
+  margin: auto;
 }
 .border-success {
   border-radius: 10px;
@@ -27,17 +27,24 @@ top: -1.7em;
 }
 .temperature-scale {
   font-size: 1.5em;
-  display:inline-block;  
- }
+  display: inline-block;
+}
 .temperature-scale a {
   text-decoration: none;
 }
 .forecast-section {
   justify-content: space-between;
-  min-height: 200px;
+  overflow: hidden;
+  gap: 50px;
+  flex-wrap: nowrap;
+  max-height: 190px;
+  color: var(--bs-white);
+  font-weight: 600;
+  font-size: 1.2em;
 }
 .forecast-card {
   padding: 0;
+  width: 20%;
 }
 .card-title {
   color: var(--bs-white);
@@ -62,13 +69,13 @@ top: -1.7em;
 .signature {
   display: inline;
   margin: 0 auto;
-  text-align: center; 
+  text-align: center;
 }
 #currentCity {
   text-align: left;
-    color: var(--bs-white);
-    font-weight: 700;
-    font-size: 1.7em;
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 1.7em;
 }
 
 #currentDateTime {
@@ -78,7 +85,7 @@ top: -1.7em;
   font-size: 1.2em;
 }
 #weatherIcon {
- display: block;  
+  display: block;
 }
 #temperature {
   text-align: left;
@@ -93,10 +100,10 @@ top: -1.7em;
   text-decoration: none;
 }
 #wind {
-text-align: left;
-color: var(--bs-white);
-font-weight: 700;
-font-size: 1em;
+  text-align: left;
+  color: var(--bs-white);
+  font-weight: 700;
+  font-size: 1em;
 }
 #humidity {
   text-align: left;
